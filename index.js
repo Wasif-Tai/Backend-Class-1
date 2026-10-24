@@ -1,5 +1,6 @@
 import express from "express";
-import userRoutes from "./routes/test.js";
+import testRoutes from "./routes/test.js";
+import userRoutes from "./routes/users.js";
 
 const app = express();
 const PORT = 3000;
@@ -7,8 +8,18 @@ const PORT = 3000;
 //middleware
 app.use(express.json());
 
-// Routes
-app.use("/test", )
+// Custom Middleware
+const auth = (req, res, next) => {
+  console.log(req.headers);
+  if (req.headers["test-auth"] && req.headers["test-auth"] == "wasif") {
+    next();
+  } else {
+    res.send("User not defined");
+  }
+};
+app.use("/test", testRoutes);
+app.use("/user", auth, userRoutes);
+
 // Home route
 app.get("/", (req, res) => {
   res.send("Server is running");
@@ -28,6 +39,8 @@ app.listen(PORT, () => {
 // const app = express() ke zariye express framework ko app variable me store karenge
 // const PORT = 3000 ke zariye server ko run karne ke liye port number define karenge
 // app.use(express.json()) ke zariye express framework me json data ko parse karenge
+// use is like a middleware which is used to handle the request and response
+// middleware ko broker samjhlo
 
 // Type of requesting:
 

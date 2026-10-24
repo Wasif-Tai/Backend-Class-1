@@ -1,18 +1,18 @@
 import express from "express";
 
-const userRoutes = express.Router();
+const testRoutes = express.Router();
 
-userRoutes.get("/test", (req, res) => {
+testRoutes.get("/", (req, res) => {
   res.send({ data: { name: "Wasif" }, error: false, status: 200 });
 });
-userRoutes.post("/test", (req, res) => {
+testRoutes.post("/", (req, res) => {
   res.send("Post Request");
 });
-userRoutes.put("/test", (req, res) => {
+testRoutes.put("/", (req, res) => {
   res.send("PUT Request");
 });
-userRoutes.delete("/test", (req, res) => {
+testRoutes.delete("/", (req, res) => {
   res.send("Delete Request");
 });
 
-export default userRoutes;
+export default testRoutes;
